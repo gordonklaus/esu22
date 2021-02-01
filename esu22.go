@@ -1,6 +1,8 @@
 package esu22
 
 import (
+	"fmt"
+
 	"github.com/google/gousb"
 )
 
@@ -23,6 +25,9 @@ func send(op, x byte) error {
 	d, err := ctx.OpenDeviceWithVIDPID(0x0a92, 0x0141)
 	if err != nil {
 		return err
+	}
+	if d == nil {
+		return fmt.Errorf("device not found")
 	}
 	defer d.Close()
 
